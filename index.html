@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Handpan Sphere — виртуальный ханг и атмосферный бэк</title>
+<meta name="description" content="Handpan Sphere — виртуальный ханг онлайн и атмосферный бэк в строе твоего инструмента: 20 строёв, аккорды с подсветкой нот, атмосферы, природа и ритм, запись в MP3 и WAV. В браузере, офлайн и в Telegram.">
+<link rel="canonical" href="https://handpansphere.ru/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Handpan Sphere">
+<meta property="og:title" content="Handpan Sphere — виртуальный ханг и атмосферный бэк">
+<meta property="og:description" content="Играй на ханге прямо на схеме, учись по подсветке аккордов и джемь с атмосферой в строе твоего инструмента.">
+<meta property="og:url" content="https://handpansphere.ru/">
+<meta property="og:image" content="https://handpansphere.ru/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Handpan Sphere","url":"https://handpansphere.ru/","applicationCategory":"MusicApplication","operatingSystem":"Any","inLanguage":["ru","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"description":"Виртуальный ханг онлайн и атмосферный бэк в строе твоего инструмента."}</script>
+<meta name="theme-color" content="#F4F2FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07090F" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Handpan Sphere">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="./icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <script type="module" crossorigin src="./assets/index-zmCnYmL6.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-_Tf8iize.css">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+    <div class="brand-text">
+      <h1>Handpan Sphere <span class="ver">v.0318</span></h1>
+      <p class="tagline">virtual handpan player &amp; atmospheric setup</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button type="button" class="icon-btn lang-btn" id="langBtn" lang="en" aria-label="English version" data-i18n-aria="lang.otherLabel"><span data-i18n="lang.other">en</span></button>
+    <button type="button" class="icon-btn" id="themeBtn" aria-label="Тема" data-i18n-aria="header.theme"><span id="themeIcon"></span></button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="panel instrument" aria-labelledby="panName">
+    <div class="inst-head">
+      <h2 id="panName"></h2>
+      <p class="notation" id="panNotation"></p>
+    </div>
+    <div class="pan" id="pan"><svg id="panSvg" viewBox="0 0 600 600" role="group" aria-label="Схема ханга" data-i18n-aria="instrument.chart"></svg></div>
+    <p class="ding-line" id="dingInfo"></p>
+    <p class="learn-line" id="learnLine" aria-live="polite" hidden></p>
+    <div class="inst-actions">
+      <button type="button" class="chip-btn" id="catalogBtn"><span data-icon="grid"></span><span data-i18n="instrument.catalog">Каталог</span></button>
+      <button type="button" class="chip-btn" id="newBtn"><span data-icon="plus"></span><span data-i18n="instrument.newPan">Новый ханг</span></button>
+      <button type="button" class="chip-btn" id="editBtn"><span data-icon="pencil"></span><span data-i18n="instrument.edit">Изменить</span></button>
+    </div>
+    <div class="list tune">
+      <div class="row fold-row" style="--inset:62px">
+        <span class="tile" data-icon="sliders" style="--c:var(--ic-violet)"></span>
+        <span class="row-text"><span class="title-line"><button type="button" class="fold-head" data-fold="tune" aria-expanded="false" aria-controls="body-tune" aria-describedby="sum-tune"><span class="title" data-i18n="instrument.tuning">Строй и подстройка</span></button><button type="button" class="help-btn" data-help="tune"></button></span><span class="sub" id="sum-tune"></span></span>
+        <span class="chev" data-icon="chevron"></span>
+      </div>
+      <div id="body-tune" hidden>
+      <div class="row"><span class="title grow" data-i18n="instrument.shift">Сдвиг на полтона</span><div class="pills"><button type="button" class="pill" id="tDown" aria-label="Ниже на полтона" data-i18n-aria="instrument.shiftDown">−½</button><button type="button" class="pill" id="tUp" aria-label="Выше на полтона" data-i18n-aria="instrument.shiftUp">+½</button></div></div>
+      <div class="row"><span class="title grow" data-i18n="instrument.ref">Ля первой октавы</span><div class="seg compact" id="refSeg" role="radiogroup" aria-label="Ля первой октавы" data-i18n-aria="instrument.ref"></div></div>
+      <div class="row block">
+        <div class="slider-top"><label class="title" for="cents" data-i18n="instrument.fine">Точная подстройка</label><span class="value" id="centsOut"></span></div>
+        <input type="range" id="cents" min="-50" max="50" step="1">
+      </div>
+      <button type="button" class="row" id="refBtn" aria-pressed="false" style="--inset:62px">
+        <span class="tile" data-icon="tone" style="--c:var(--ic-peach)"></span>
+        <span class="row-text"><span class="title tint" id="refLabel" data-i18n="instrument.dingTone">Тон динга</span></span>
+      </button>
+      <button type="button" class="row" id="runBtn" style="--inset:62px">
+        <span class="tile" data-icon="stairs" style="--c:var(--ic-mint)"></span>
+        <span class="row-text"><span class="title tint" data-i18n="instrument.walk">Пройти по строю</span></span>
+      </button>
+      </div>
+      <!-- «Обучение»: exercises on the pan's chart, in development; the row opens what is coming -->
+      <button type="button" class="row" id="trainBtn" style="--inset:62px" hidden>
+        <span class="tile" data-icon="book" style="--c:var(--ic-rose)"></span>
+        <span class="row-text"><span class="title-line"><span class="title" data-i18n="train.title">Обучение</span><span class="soon-badge" data-i18n="train.soon">в разработке</span></span><span class="sub wrap" data-i18n="train.sub">Маятник, аккорды-формы, арпеджио</span></span>
+        <span class="row-chev" data-icon="chevron"></span>
+      </button>
+    </div>
+  </section>
+
+  <div class="controls">
+    <section class="group" id="motionSection">
+      <h2 class="header" id="motionHeader"><span data-i18n="motion.header">Движение</span><button type="button" class="help-btn" data-help="motion"></button></h2>
+      <div class="panel">
+        <div class="row block" id="hmodeRow"><div class="seg" id="hmodeSeg" role="radiogroup" aria-label="Режим движения" data-i18n-aria="motion.mode"></div></div>
+        <div class="orbit" id="orbitBox"><canvas id="orbit" aria-hidden="true"></canvas></div>
+        <div class="row block" id="tempoRow">
+          <div class="slider-top"><label class="title" for="bpm" data-i18n="motion.tempo">Темп</label><span class="value" id="bpmOut"></span><span class="cs tempo-steps"><button type="button" class="step" id="bpmDown" aria-label="Медленнее" data-i18n-aria="motion.slower">−</button><button type="button" class="step" id="bpmUp" aria-label="Быстрее" data-i18n-aria="motion.faster">+</button></span><button type="button" class="pill accent" id="tapBtn" data-i18n="motion.tap">Тап</button></div>
+          <input type="range" id="bpm" min="30" max="160" step="1">
+        </div>
+        <div id="singleBox">
+          <div class="row block" id="rootRow"><span class="title" data-i18n="motion.tonic">Тоника</span><div class="seg" id="rootSeg" role="radiogroup" aria-label="Тоника атмосферы" data-i18n-aria="motion.tonicAria"></div></div>
+        </div>
+        <div id="squareBox" hidden>
+          <div class="phrase-grid" id="phraseRows"></div>
+        </div>
+        <div class="row fold-row" style="--inset:62px">
+          <span class="tile" data-icon="sliders" style="--c:var(--ic-sky)"></span>
+          <span class="row-text"><span class="title-line"><button type="button" class="fold-head" data-fold="meter" aria-expanded="false" aria-controls="body-meter" aria-describedby="sum-meter"><span class="title" data-i18n="motion.cycle">Размер и круг</span></button></span><span class="sub" id="sum-meter"></span></span>
+          <span class="chev" data-icon="chevron"></span>
+        </div>
+        <div id="body-meter" hidden>
+          <div id="cycleRows">
+            <div class="row"><span class="title grow" data-i18n="motion.chordsInRing">Аккордов в круге</span><span class="cs" id="stepsCtl"><button type="button" class="step" aria-label="Меньше аккордов" data-i18n-aria="motion.fewerChords">−</button><span class="cv"></span><button type="button" class="step" aria-label="Больше аккордов" data-i18n-aria="motion.moreChords">+</button></span></div>
+            <div class="row"><span class="title grow" data-i18n="motion.barsPerChord">Тактов на аккорд</span><div class="seg compact" id="barsSeg" role="radiogroup" aria-label="Тактов на аккорд" data-i18n-aria="motion.barsPerChord"></div></div>
+          </div>
+          <div class="row"><span class="title grow" data-i18n="motion.meter">Размер</span><span class="meter-ctl"><span class="cs" id="numCtl"><button type="button" class="step" aria-label="Меньше долей" data-i18n-aria="motion.fewerBeats">−</button><span class="cv"></span><button type="button" class="step" aria-label="Больше долей" data-i18n-aria="motion.moreBeats">+</button></span><div class="seg compact" id="denSeg" role="radiogroup" aria-label="Длительность доли" data-i18n-aria="motion.beatLength"></div></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group" id="autoSection">
+      <div class="panel">
+        <div class="row" style="--inset:62px">
+          <span class="tile" data-icon="wand" style="--c:var(--ic-violet)"></span>
+          <div class="row-text"><span class="title-line"><span class="title" data-i18n="common.auto">Авто</span><button type="button" class="help-btn" data-help="auto"></button></span><span class="sub" id="autoSub"></span></div>
+          <label class="switch"><input type="checkbox" role="switch" id="autoSw" aria-label="Авто" data-i18n-aria="common.auto"><span class="track"><span class="knob"></span></span></label>
+        </div>
+        <button type="button" class="row" id="shuffleBtn" style="--inset:62px" hidden>
+          <span class="tile" data-icon="shuffle" style="--c:var(--ic-sky)"></span>
+          <span class="row-text"><span class="title tint" data-i18n="autoAll.newSetup">Новый сетап</span></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="panel">
+        <div class="row fold-row" style="--inset:62px">
+          <span class="tile" data-icon="wave" style="--c:var(--ic-violet)"></span>
+          <span class="row-text"><span class="title-line"><button type="button" class="fold-head" data-fold="atm" aria-expanded="false" aria-controls="body-atm" aria-describedby="sum-atm"><span class="title" data-i18n="atm.title">Атмосфера</span></button><button type="button" class="help-btn" data-help="atm"></button></span><span class="sub" id="sum-atm"></span></span>
+          <span class="chev" data-icon="chevron"></span>
+        </div>
+        <div id="body-atm" hidden>
+          <div class="row" style="--inset:62px">
+            <span class="tile" data-icon="wand" style="--c:var(--ic-violet)"></span>
+            <span class="row-text"><span class="title" data-i18n="common.auto">Авто</span><span class="sub wrap" id="atmAutoSub">Атмосферы сменяют друг друга</span></span>
+            <label class="switch"><input type="checkbox" role="switch" id="atmAutoSw" aria-label="Авто для атмосферы" data-i18n-aria="atm.autoAria"><span class="track"><span class="knob"></span></span></label>
+          </div>
+          <div id="droneList" role="radiogroup" aria-label="Атмосфера" data-i18n-aria="atm.title"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="panel">
+        <div class="row fold-row" style="--inset:62px">
+          <span class="tile" data-icon="note" style="--c:var(--ic-rose)"></span>
+          <span class="row-text"><span class="title-line"><button type="button" class="fold-head" data-fold="sound" aria-expanded="false" aria-controls="body-sound" aria-describedby="sum-sound"><span class="title" data-i18n="sound.title">Звук</span></button><button type="button" class="help-btn" data-help="sound"></button></span><span class="sub" id="sum-sound"></span></span>
+          <span class="chev" data-icon="chevron"></span>
+        </div>
+        <div id="body-sound" hidden>
+          <div class="row" style="--inset:62px">
+            <span class="tile" data-icon="wand" style="--c:var(--ic-rose)"></span>
+            <span class="row-text"><span class="title" data-i18n="common.auto">Авто</span><span class="sub" data-i18n="sound.autoSub">Уровни понемногу меняются</span></span>
+            <label class="switch"><input type="checkbox" role="switch" id="soundAutoSw" aria-label="Авто для звука" data-i18n-aria="sound.autoAria"><span class="track"><span class="knob"></span></span></label>
+          </div>
+          <div id="soundRows"></div>
+        <div class="row pressable" style="--inset:62px">
+          <span class="tile" data-icon="sliders" style="--c:var(--ic-gray)"></span>
+          <span class="title grow" data-i18n="sound.timbre">Тембр аккордов</span>
+          <span class="popup"><span class="pv" id="timbreValue"></span><span data-icon="updown"></span></span>
+          <select id="timbre" aria-label="Тембр аккордов" data-i18n-aria="sound.timbre"></select>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="panel">
+        <div class="row fold-row" style="--inset:62px">
+          <span class="tile" data-icon="leaf" style="--c:var(--ic-mint)"></span>
+          <span class="row-text"><span class="title-line"><button type="button" class="fold-head" data-fold="nature" aria-expanded="false" aria-controls="body-nature" aria-describedby="sum-nature"><span class="title" data-i18n="nature.title">Природа</span></button><button type="button" class="help-btn" data-help="nature"></button></span><span class="sub" id="sum-nature"></span></span>
+          <span class="chev" data-icon="chevron"></span>
+          <label class="switch"><input type="checkbox" role="switch" id="natureOnSw" aria-label="Природа: включить или выключить всю группу" data-i18n-aria="nature.group"><span class="track"><span class="knob"></span></span></label>
+        </div>
+        <div id="body-nature" hidden>
+          <div class="row" style="--inset:62px">
+            <span class="tile" data-icon="wand" style="--c:var(--ic-mint)"></span>
+            <span class="row-text"><span class="title" data-i18n="common.auto">Авто</span><span class="sub" data-i18n="nature.autoSub">Звуки медленно перетекают</span></span>
+            <label class="switch"><input type="checkbox" role="switch" id="natureAutoSw" aria-label="Авто для природы" data-i18n-aria="nature.autoAria"><span class="track"><span class="knob"></span></span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="panel">
+        <div class="row fold-row" style="--inset:62px">
+          <span class="tile" data-icon="drum" style="--c:var(--ic-amber)"></span>
+          <span class="row-text"><span class="title-line"><button type="button" class="fold-head" data-fold="rhythm" aria-expanded="false" aria-controls="body-rhythm" aria-describedby="sum-rhythm"><span class="title" data-i18n="rhythm.title">Ритм</span></button><button type="button" class="help-btn" data-help="rhythm"></button></span><span class="sub" id="sum-rhythm"></span></span>
+          <span class="chev" data-icon="chevron"></span>
+          <label class="switch"><input type="checkbox" role="switch" id="rhythmOnSw" aria-label="Ритм: включить или выключить всю группу" data-i18n-aria="rhythm.group"><span class="track"><span class="knob"></span></span></label>
+        </div>
+        <div id="body-rhythm" hidden>
+          <div class="row" style="--inset:62px">
+            <span class="tile" data-icon="wand" style="--c:var(--ic-amber)"></span>
+            <span class="row-text"><span class="title" data-i18n="common.auto">Авто</span><span class="sub" data-i18n="rhythm.autoSub">Рисунок понемногу меняется</span></span>
+            <label class="switch"><input type="checkbox" role="switch" id="rhythmAutoSw" aria-label="Авто для ритма" data-i18n-aria="rhythm.autoAria"><span class="track"><span class="knob"></span></span></label>
+          </div>
+          <div id="rhythmRows"></div>
+          <div class="row" style="--inset:62px">
+            <span class="tile" data-icon="metronome" style="--c:var(--ic-rose)"></span>
+            <span class="title grow" data-i18n="rhythm.metronome">Метроном</span>
+            <label class="switch"><input type="checkbox" role="switch" id="metroSw" aria-label="Метроном" data-i18n-aria="rhythm.metronome"><span class="track"><span class="knob"></span></span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="panel">
+        <div class="row fold-row" style="--inset:62px">
+          <span class="tile" data-icon="reverb" style="--c:var(--ic-sky)"></span>
+          <span class="row-text"><span class="title-line"><button type="button" class="fold-head" data-fold="fx" aria-expanded="false" aria-controls="body-fx" aria-describedby="sum-fx"><span class="title" data-i18n="fx.title">Эффекты</span></button><button type="button" class="help-btn" data-help="fx"></button></span><span class="sub" id="sum-fx"></span></span>
+          <span class="chev" data-icon="chevron"></span>
+          <label class="switch"><input type="checkbox" role="switch" id="fxOnSw" aria-label="Эффекты: включить или выключить всю группу" data-i18n-aria="fx.group"><span class="track"><span class="knob"></span></span></label>
+        </div>
+        <div id="body-fx" hidden></div>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2 class="header"><span data-i18n="session.header">Сессия</span><button type="button" class="help-btn" data-help="session"></button></h2>
+      <div class="panel"><div class="row block"><div class="seg" id="durSeg" role="radiogroup" aria-label="Длительность сессии" data-i18n-aria="session.length"></div></div></div>
+    </section>
+
+    <section class="group" id="recSection">
+      <h2 class="header" id="recHeader"><span data-i18n="rec.header">Запись</span><button type="button" class="help-btn" data-help="rec"></button></h2>
+      <div class="panel">
+        <button type="button" class="row" id="recBtn" style="--inset:62px">
+          <span class="tile" data-icon="record" id="recIcon" style="--c:var(--ic-rose)"></span>
+          <span class="row-text"><span class="title-line"><span class="title tint" id="recLabel" data-i18n="rec.record">Запись</span><span class="soon-badge" id="recSoon" hidden data-i18n="rec.soon">В Telegram</span></span><span class="sub" id="recSub" data-i18n="rec.sub">MP3 и WAV, до 10 минут</span></span>
+        </button>
+        <div class="row" id="fmtRow" style="--inset:62px">
+          <span class="tile" data-icon="sliders" style="--c:var(--ic-gray)"></span>
+          <span class="title grow" data-i18n="rec.format">Формат файла</span>
+          <div class="seg compact" id="fmtSeg" role="radiogroup" aria-label="Формат файла" data-i18n-aria="rec.format"></div>
+        </div>
+        <div class="row" id="micRow" style="--inset:62px">
+          <span class="tile" data-icon="mic" style="--c:var(--ic-peach)"></span>
+          <span class="row-text"><span class="title" data-i18n="rec.mic">Микрофон</span><span class="sub" data-i18n="rec.micSub">Наложить живой ханг на атмосферный бэк</span></span>
+          <label class="switch"><input type="checkbox" role="switch" id="micSw" aria-label="Микрофон в записи" data-i18n-aria="rec.micAria"><span class="track"><span class="knob"></span></span></label>
+        </div>
+        <button type="button" class="row" id="saveBtn" style="--inset:62px" hidden>
+          <span class="tile" data-icon="download" style="--c:var(--ic-sky)"></span>
+          <span class="row-text"><span class="title tint" data-i18n="rec.save">Сохранить файл</span><span class="sub" id="saveSub"></span></span>
+        </button>
+        <button type="button" class="row" id="sendBtn" style="--inset:62px" hidden>
+          <span class="tile" data-icon="send" style="--c:var(--ic-sky)"></span>
+          <span class="row-text"><span class="title tint" data-i18n="rec.send">Отправить в чат</span><span class="sub" id="sendSub"></span></span>
+        </button>
+        <button type="button" class="row" id="shareBtn" style="--inset:62px">
+          <span class="tile" data-icon="share" style="--c:var(--ic-violet)"></span>
+          <span class="row-text"><span class="title tint" data-i18n="rec.share">Поделиться</span><span class="sub" id="shareSub" data-i18n="rec.shareSub">Сетап или запись в мессенджер и соцсети</span></span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="page-foot">
+      <button type="button" class="link-btn" id="tourBtn" data-i18n="tour.again">Как пользоваться</button>
+      <button type="button" class="foot-cta" id="learnBtn">
+        <span class="foot-cta-ic" data-icon="cap"></span>
+        <span class="foot-cta-text"><span class="t" data-i18n="footer.learn">Учиться играть на ханге</span><span class="s" data-i18n="footer.learnSub">Онлайн и офлайн с Andy Now</span></span>
+        <span class="foot-cta-chev" data-icon="chevron"></span>
+      </button>
+      <button type="button" class="foot-cta" id="supportBtn">
+        <span class="foot-cta-ic" data-icon="heart"></span>
+        <span class="foot-cta-text"><span class="t" data-i18n="footer.support">Поддержать</span><span class="s" data-i18n="footer.supportSub">Развитие приложения и музыкальных проектов</span></span>
+        <span class="foot-cta-chev" data-icon="chevron"></span>
+      </button>
+      <p class="rights">© 2026 Handpan Sphere. <span data-i18n="footer.rights">Все права защищены.</span></p>
+    </footer>
+  </div>
+</main>
+
+<div class="player-wrap">
+  <div class="player">
+    <button type="button" class="play" id="playBtn" aria-label="Начать" data-i18n-aria="player.start"><span data-icon="play" id="playIcon"></span></button>
+    <button type="button" class="stop-btn" id="stopBtn" aria-label="Остановить" hidden data-i18n-aria="player.stop"><span data-icon="stop"></span></button>
+    <div class="status" aria-live="polite">
+      <p id="statusMain" data-i18n="player.ready">Готово к старту</p>
+      <p id="statusSub" data-i18n="player.everyStart">Каждый запуск — новая вариация</p>
+      <div class="progress" aria-hidden="true"><div id="progressFill"></div></div>
+    </div>
+    <span class="rec-badge" id="recBadge" hidden><span class="rec-dot"></span><span id="recTime">0:00</span></span>
+  </div>
+</div>
+
+<div class="sheet-wrap" id="catalogSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="catTitle">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><span></span><h3 id="catTitle" data-i18n="catalog.title">Каталог строёв</h3><button type="button" class="nav-btn" data-close data-i18n="common.done">Готово</button></div>
+    <input type="search" class="search" id="catSearch" placeholder="Поиск: Kurd, Amara, E3…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поиск строя" data-i18n-aria="catalog.searchAria" data-i18n-ph="catalog.search">
+    <div id="catList"></div>
+  </div>
+</div>
+
+<div class="sheet-wrap" id="builderSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="bTitle">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><button type="button" class="nav-btn left" data-close data-i18n="common.cancel">Отмена</button><h3 id="bTitle" data-i18n="instrument.newPan">Новый ханг</h3><button type="button" class="nav-btn" id="bSave" data-i18n="common.save">Сохранить</button></div>
+    <input type="text" class="field-input" id="bName" placeholder="Название, например D Kurd 10" aria-label="Название ханга" autocomplete="off" data-i18n-aria="builder.nameAria" data-i18n-ph="builder.name">
+    <section class="group">
+      <h2 class="header" data-i18n="builder.counts">Количество нот</h2>
+      <div class="list" style="margin-top:0">
+        <div class="counts" id="bCounts"></div>
+      </div>
+      <p class="footer" data-i18n="builder.countsFoot">Динги — центральный и басовые снизу. Круг — ноты вокруг динга. Мутанты — дополнительные ноты внутри круга. Снизу — ноты на нижней крышке.</p>
+    </section>
+    <section class="group">
+      <div class="list" style="margin-top:0">
+        <div class="row block"><span class="title" data-i18n="builder.layout">Расположение</span><div class="seg" id="bAlign" role="radiogroup" aria-label="Расположение" data-i18n-aria="builder.layout"></div></div>
+        <div class="row block"><span class="title" data-i18n="builder.numbering">Нумерация</span><div class="seg" id="bNumbering" role="radiogroup" aria-label="Нумерация" data-i18n-aria="builder.numbering"></div></div>
+        <div class="row block" id="bModeRow"><span class="title" data-i18n="builder.tap">Касание поля</span><div class="seg" id="bMode" role="radiogroup" aria-label="Что делает касание поля" data-i18n-aria="builder.tapAria"></div></div>
+        <div class="row"><span class="title grow" data-i18n="instrument.shift">Сдвиг на полтона</span><div class="pills"><button type="button" class="pill" id="bDown" aria-label="Ниже на полтона" data-i18n-aria="instrument.shiftDown">−½</button><button type="button" class="pill" id="bUp" aria-label="Выше на полтона" data-i18n-aria="instrument.shiftUp">+½</button></div></div>
+      </div>
+    </section>
+    <div class="pan builder-pan"><svg id="bSvg" viewBox="0 0 600 600" role="group" aria-label="Схема собираемого ханга" data-i18n-aria="builder.chart"></svg></div>
+    <p class="footer" id="bHint"></p>
+    <div class="center-btn"><button type="button" class="pill" id="bResetPos" hidden data-i18n="builder.resetPos">Расставить ноты снизу заново</button></div>
+    <section class="group">
+      <h2 class="header" data-i18n="builder.notes">Ноты строкой</h2>
+      <div class="list" style="margin-top:0">
+        <div class="row block">
+          <textarea class="field-input" id="bNotes" rows="2" spellcheck="false" autocapitalize="off" aria-label="Ноты строкой" data-i18n-aria="builder.notes"></textarea>
+          <p class="row-note" data-i18n="builder.notesFoot">Формат каталога: басовые динги в скобках, динг, косая черта, остальные ноты; ноты на нижней крышке в скобках. Например: (Bb2) (C3) D3 / (F3) A3 Bb3 C4…</p>
+        </div>
+        <button type="button" class="row" id="bApply" style="--inset:62px"><span class="tile" data-icon="check" style="--c:var(--ic-aqua)"></span><span class="row-text"><span class="title tint" data-i18n="builder.apply">Применить строку</span></span></button>
+      </div>
+      <p class="error" id="bError" hidden></p>
+    </section>
+    <section class="group" id="bDeleteGroup" hidden>
+      <div class="list" style="margin-top:0"><button type="button" class="row danger" id="bDelete"><span class="row-text"><span class="title" data-i18n="builder.remove">Удалить из моих хангов</span></span></button></div>
+    </section>
+  </div>
+</div>
+
+<div class="sheet-wrap" id="pickerSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><button type="button" class="nav-btn left" data-close data-i18n="common.cancel">Отмена</button><h3 id="pTitle" data-i18n="picker.title">Нота</h3><span></span></div>
+    <input type="search" class="search" id="pSearch" placeholder="Поиск: C#, Eb4, 3…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поиск ноты" data-i18n-aria="picker.searchAria" data-i18n-ph="picker.search">
+    <div class="list" id="pDingRow" hidden>
+      <div class="row"><span class="row-text"><span class="title" data-i18n="picker.bassDing">Басовый динг</span><span class="sub wrap" data-i18n="picker.bassDingSub">Нота снизу станет дингом: на неё сможет опираться атмосфера и движение по дингам.</span></span><label class="switch"><input type="checkbox" role="switch" id="pDingSw" aria-label="Басовый динг" data-i18n-aria="picker.bassDing"><span class="track"><span class="knob"></span></span></label></div>
+    </div>
+    <div class="list" id="pChips"></div>
+  </div>
+</div>
+
+<div class="sheet-wrap" id="phraseSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="grabber"></div>
+    <div class="sheet-head">
+      <div class="sheet-nav"><span></span><h3 id="sheetTitle" data-i18n="chordSheet.title">Фраза</h3><button type="button" class="nav-btn" id="sheetDone" data-i18n="common.done">Готово</button></div>
+      <div class="sheet-pan" id="sheetPan">
+        <div class="pan"><svg id="sheetSvg" viewBox="0 0 600 600" role="group" aria-label="Ноты аккорда на схеме ханга" data-i18n-aria="chordSheet.chart"></svg></div>
+        <p class="sheet-pan-line" id="sheetPanLine" aria-live="polite"></p>
+      </div>
+    </div>
+    <section class="group">
+      <h2 class="header"><span data-i18n="chordSheet.chord">Аккорд</span><button type="button" class="help-btn" data-help="chord"></button></h2>
+      <div class="list" style="margin-top:0">
+        <div class="row block"><div class="seg" id="sheetMode" role="radiogroup" aria-label="Аккорд" data-i18n-aria="chordSheet.chord"></div></div>
+        <div class="row block" id="sheetRootRow">
+          <p class="cg-title root-title"><span data-i18n="chordSheet.root">Основа аккорда</span><button type="button" class="help-btn" data-help="root"></button></p>
+          <div class="chips" id="sheetRoot" role="radiogroup" aria-label="Основа аккорда" data-i18n-aria="chordSheet.root"></div>
+        </div>
+        <div class="row block" id="sheetPresetsBox">
+          <div id="sheetPresets"></div>
+        </div>
+        <div id="sheetCustom">
+          <p class="chord-line" id="sheetChord"></p>
+          <div class="chips" id="sheetChips"></div>
+        </div>
+        <button type="button" class="row" id="sheetListen" style="--inset:62px">
+          <span class="tile" data-icon="listen" style="--c:var(--ic-sky)"></span>
+          <span class="row-text"><span class="title tint" data-i18n="chordSheet.listen">Прослушать</span></span>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="sheet-wrap" id="shareSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet share-sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><span></span><h3 id="shTitle" data-i18n="share.title">Поделиться</h3><button type="button" class="nav-btn" data-close data-i18n="common.done">Готово</button></div>
+    <p class="share-preview" id="sharePreview"></p>
+    <div class="share-grid" id="shareTargets"></div>
+    <div class="list">
+      <button type="button" class="row" id="copyBtn" style="--inset:62px">
+        <span class="tile" data-icon="copy" style="--c:var(--ic-violet)"></span>
+        <span class="row-text"><span class="title tint" data-i18n="share.copy">Скопировать ссылку и текст</span><span class="sub" id="copySub" data-i18n="share.copySub">Вставь куда угодно</span></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- «Учиться играть на ханге»: photos load when the page is first opened (data-src), they are not in the offline cache -->
+<div class="sheet-wrap" id="learnSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet info-sheet" role="dialog" aria-modal="true" aria-labelledby="learnNav">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><span></span><h3 id="learnNav" data-i18n="learn.nav">Обучение</h3><button type="button" class="nav-btn" data-close data-i18n="common.done">Готово</button></div>
+    <img class="hero square" data-src="photos/learn-sea.webp" width="828" height="828" alt="Andy Now с хангом на берегу моря" data-i18n-alt="learn.photo">
+    <h2 class="info-title" data-i18n="learn.title">Учиться играть на ханге</h2>
+    <p class="info-lead" data-i18n="learn.lead">Меня зовут Andy Now. Я играю на ханге, пишу музыку и веду проект «Музыка Сфер».</p>
+    <ul class="facts" id="learnFacts"></ul>
+    <p class="info-text" data-i18n="learn.about">Больше семи лет вместе с проектом «Анимара» я исследую, как звук влияет на сознание: на внимание, дыхание и восприятие времени. Уже три года веду звуковые сессии с хангом в зеркальном Храме Звука на Алтае.</p>
+    <p class="info-text" data-i18n="learn.about2">Учу тех, кто никогда не держал инструмент в руках, и тех, кто уже играет и ищет свой почерк. Музыкальный опыт не нужен: достаточно интереса и желания прикоснуться к инструменту.</p>
+    <div class="photo-strip">
+      <img data-src="photos/learn-andy.webp" width="900" height="1125" alt="" data-i18n-alt="learn.strip.0">
+      <img data-src="photos/learn-duo.webp" width="1200" height="900" alt="" data-i18n-alt="learn.strip.1">
+      <img data-src="photos/learn-dome.webp" width="800" height="1055" alt="" data-i18n-alt="learn.strip.2">
+      <img data-src="photos/learn-hand.webp" width="1100" height="825" alt="" data-i18n-alt="learn.strip.3">
+      <img data-src="photos/learn-rhythm.webp" width="800" height="1067" alt="" data-i18n-alt="learn.strip.4">
+    </div>
+    <h4 class="info-h" data-i18n="learn.formats">Как можно заниматься</h4>
+    <div id="learnOffers"></div>
+    <div class="list">
+      <a class="row" id="practiceLink" data-ext data-track="practice" target="_blank" rel="noopener" style="--inset:62px">
+        <span class="tile" data-icon="headphones" style="--c:var(--ic-aqua)"></span>
+        <span class="row-text"><span class="title tint" data-i18n="learn.practice">Бесплатная звуковая практика</span><span class="sub wrap" data-i18n="learn.practiceSub">Начните с практики в канале «Музыка Сфер»</span></span>
+        <span class="row-chev" data-icon="chevron"></span>
+      </a>
+    </div>
+    <div class="cta-box">
+      <h5 data-i18n="learn.askTitle">Не знаете, с чего начать?</h5>
+      <p data-i18n="learn.askText">Напишите мне: расскажу, с чего лучше начать именно вам. Отвечаю лично.</p>
+      <a class="btn primary wide" id="askLink" data-ext data-track="write" target="_blank" rel="noopener"><span data-icon="send"></span><span data-i18n="learn.ask">Написать Andy</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- «Храм Звука»: opened from the facilitator course on the learning page -->
+<div class="sheet-wrap" id="templeSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet info-sheet" role="dialog" aria-modal="true" aria-labelledby="templeNav">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><span></span><h3 id="templeNav" data-i18n="temple.nav">Храм Звука</h3><button type="button" class="nav-btn" data-close data-i18n="common.done">Готово</button></div>
+    <img class="hero square" data-src="photos/temple-1-sunrise.webp" width="1200" height="1195" alt="" data-i18n-alt="temple.photos.0">
+    <h2 class="info-title" data-i18n="temple.title">Храм Звука на Алтае</h2>
+    <p class="info-text" data-i18n="temple.place">Частный заповедник «Земли Силы» Анимара в долине Катуни, в Чемальском районе Алтая: более 600 гектаров нетронутой природы, тишины и чистого неба.</p>
+    <img class="photo" data-src="photos/temple-2-valley.webp" width="1200" height="763" alt="" data-i18n-alt="temple.photos.1">
+    <p class="info-text" data-i18n="temple.dome">В его центре стоит зеркальный купол диаметром 12 метров из более чем 1200 зеркальных панелей. Звук отражается, усиливается и мягко окутывает со всех сторон: пространство звучит на 360°.</p>
+    <img class="photo tall" data-src="photos/temple-3-inside.webp" width="900" height="1187" alt="" data-i18n-alt="temple.photos.2">
+    <img class="photo" data-src="photos/temple-4-arch.webp" width="1200" height="900" alt="" data-i18n-alt="temple.photos.3">
+    <p class="info-text" data-i18n="temple.sessions">Уже три года я веду здесь звуковые сессии с хангом: на них побывали более 10 000 человек. Часто после сессии говорят о глубоком расслаблении, ровном дыхании и ясной голове: живой звук помогает снизить напряжение и влияет на регуляцию нервной системы.</p>
+    <div class="cta-box">
+      <h5 data-i18n="temple.courseTitle">Научиться вести такие сессии</h5>
+      <p data-i18n="temple.courseText">На курсе ведущего звуковых сессий я делюсь тем, что знаю о звуке, состоянии и пространстве, и тем, что проверено годами практики в Храме Звука.</p>
+      <a class="btn primary wide" id="templeCta" data-ext data-track="healing" target="_blank" rel="noopener"><span data-icon="send"></span><span data-i18n="temple.cta">Узнать о курсе</span></a>
+    </div>
+    <div class="projects">
+      <section class="project">
+        <h4 data-i18n="temple.zemli">Проект «Земли Силы»</h4>
+        <p data-i18n="temple.zemliText">Частный заповедник проекта с более чем 600 га земли, в окружении чистой природы Алтая.</p>
+        <div class="share-grid link-grid">
+          <a class="share-target" id="zemliInsta" data-ext data-track="zemli_insta" target="_blank" rel="noopener"><span class="share-icon" style="--b:linear-gradient(45deg,#F9A13A,#E1306C 55%,#8A3AB9)" data-icon="instagram"></span><span class="share-name">Instagram</span></a>
+          <a class="share-target" id="zemliTg" data-ext data-track="zemli_tg" target="_blank" rel="noopener"><span class="share-icon" style="--b:#2AABEE" data-brand="telegram"></span><span class="share-name">Telegram</span></a>
+        </div>
+      </section>
+      <section class="project">
+        <h4 data-i18n="temple.animara">Проект «Анимара»</h4>
+        <p data-i18n="temple.animaraText">Международная сеть школ по игре на интуитивных музыкальных инструментах.</p>
+        <div class="share-grid link-grid">
+          <a class="share-target" id="animaInsta" data-ext data-track="anima_insta" target="_blank" rel="noopener"><span class="share-icon" style="--b:linear-gradient(45deg,#F9A13A,#E1306C 55%,#8A3AB9)" data-icon="instagram"></span><span class="share-name">Instagram</span></a>
+          <a class="share-target" id="animaTg" data-ext data-track="anima_tg" target="_blank" rel="noopener"><span class="share-icon" style="--b:#2AABEE" data-brand="telegram"></span><span class="share-name">Telegram</span></a>
+        </div>
+      </section>
+    </div>
+    <p class="foot-note" id="metaNote" data-i18n="temple.metaNote">Instagram принадлежит компании Meta, признанной экстремистской и запрещённой в России.</p>
+  </div>
+</div>
+
+<!-- «Обучение»: what the learning module will be; exercises are being designed (docs/drafts/learning-module.html) -->
+<div class="sheet-wrap" id="trainSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet info-sheet" role="dialog" aria-modal="true" aria-labelledby="trainNav">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><span></span><h3 id="trainNav" data-i18n="train.nav">Обучение</h3><button type="button" class="nav-btn" data-close data-i18n="common.done">Готово</button></div>
+    <h2 class="info-title"><span data-i18n="train.heading">Обучение на схеме своего ханга</span> <span class="soon-badge" data-i18n="train.soon">в разработке</span></h2>
+    <p class="info-lead" data-i18n="train.lead">Скоро здесь появятся упражнения на схеме вашего ханга: со звуком, подсветкой нот и подсказкой, какой рукой играть.</p>
+    <h4 class="info-h" data-i18n="train.first">Первые упражнения</h4>
+    <ul class="train-list" id="trainItems"></ul>
+    <h4 class="info-h" data-i18n="train.plans">Что будет</h4>
+    <ul class="train-points" id="trainPoints"></ul>
+    <p class="cta-box train-now" data-i18n="train.now">Уже сейчас: включите «Авто» под «Движением». Он соберёт круг аккордов для изучения, а схема заранее покажет следующий аккорд.</p>
+  </div>
+</div>
+
+<!-- «Поддержать»: ways to support, the album, a message -->
+<div class="sheet-wrap" id="supportSheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet info-sheet" role="dialog" aria-modal="true" aria-labelledby="supportNav">
+    <div class="grabber"></div>
+    <div class="sheet-nav"><span></span><h3 id="supportNav" data-i18n="support.nav">Поддержать</h3><button type="button" class="nav-btn" data-close data-i18n="common.done">Готово</button></div>
+    <p class="info-lead" data-i18n="support.lead">Handpan Sphere бесплатен. Если он вам откликается, вы можете поддержать разработку продукта и мои музыкальные проекты.</p>
+    <div class="share-grid link-grid">
+      <a class="share-target" id="cardLink" data-ext data-track="card" target="_blank" rel="noopener"><span class="share-icon" style="--b:var(--grad)" data-icon="card"></span><span class="share-name" data-i18n="support.card">Перевод на карту</span></a>
+      <a class="share-target" id="tipsLink" data-ext data-track="tips" target="_blank" rel="noopener"><span class="share-icon" style="--b:#5B5FE0" data-icon="ruble"></span><span class="share-name" data-i18n="support.tips">Яндекс Чаевые</span></a>
+      <a class="share-target" id="giftLink" data-ext data-track="gift" target="_blank" rel="noopener"><span class="share-icon" style="--b:#2AABEE" data-icon="gift"></span><span class="share-name" data-i18n="support.gift">Подарок в Telegram</span></a>
+    </div>
+    <p class="foot-note center" data-i18n="support.giftNote">Подарок в Telegram отправляется из моего профиля: он откроется по кнопке.</p>
+    <a class="qr-card" id="albumLink" data-ext data-track="album" target="_blank" rel="noopener">
+      <img src="qr-bandlink.svg" width="33" height="33" alt="QR-код: альбом на всех площадках" data-i18n-alt="support.albumQr">
+      <span class="row-text"><span class="title" data-i18n="support.album">Альбом «Music of the Sphere’s»</span><span class="sub wrap" data-i18n="support.albumText">Послушать релиз нового альбома можно на всех площадках</span></span>
+    </a>
+    <p class="info-text" data-i18n="support.thanks">Я благодарен каждому за внимание и вклад в развитие. С радостью принимаю обратную связь по улучшению продукта.</p>
+    <div class="list">
+      <a class="row" id="feedbackLink" data-ext data-track="feedback" target="_blank" rel="noopener" style="--inset:62px">
+        <span class="tile" data-icon="send" style="--c:var(--ic-sky)"></span>
+        <span class="row-text"><span class="title tint" data-i18n="support.write">Написать мне</span><span class="sub" data-i18n="support.writeSub">Идеи, ошибки, пожелания</span></span>
+        <span class="row-chev" data-icon="chevron"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="help-pop" id="helpPop" role="tooltip" hidden><p id="helpText"></p></div>
+
+<div class="tour" id="tour" hidden>
+  <div class="tour-block" data-side="top"></div><div class="tour-block" data-side="bottom"></div><div class="tour-block" data-side="left"></div><div class="tour-block" data-side="right"></div>
+  <div class="tour-cover" id="tourCover"></div>
+  <div class="tour-hole" id="tourHole" aria-hidden="true"></div>
+  <div class="tour-card" id="tourCard" role="dialog" aria-modal="true" aria-labelledby="tourTitle" aria-describedby="tourText">
+    <p class="tour-count" id="tourCount"></p>
+    <h3 id="tourTitle"></h3>
+    <p class="tour-text" id="tourText"></p>
+    <div class="tour-nav">
+      <div class="tour-dots" id="tourDots" aria-hidden="true"></div>
+      <button type="button" class="nav-btn left" id="tourSkip" data-i18n="tour.skip">Пропустить</button>
+      <button type="button" class="tour-next" id="tourNext" data-i18n="tour.next">Далее</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

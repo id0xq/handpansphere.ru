@@ -1,0 +1,1 @@
+(function(){setInterval(()=>self.postMessage(0),250)})();
