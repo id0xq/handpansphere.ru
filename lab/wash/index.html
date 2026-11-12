@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Wash — ханг в атмосферный массив</title>
+<meta name="theme-color" content="#F4F2FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07090F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../../icons/icon.svg" type="image/svg+xml">
+  <script type="module" crossorigin src="../../assets/wash-DNjPxpgR.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/params-CpkzLGkn.js">
+  <link rel="modulepreload" crossorigin href="../../assets/knob-Cgh6HHJo.js">
+  <link rel="stylesheet" crossorigin href="../../assets/styles-QhfIaQdQ.css">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<header class="top">
+  <a class="brand" href="../../" id="backLink">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+    <span class="brand-text">
+      <span class="brand-name"><span data-i18n="wash.title">Wash</span> <span class="lab-chip" data-i18n="wash.lab">лаборатория</span></span>
+      <span class="tagline" data-i18n="wash.tagline">ханг в атмосферный массив</span>
+    </span>
+  </a>
+  <button class="lang-btn" id="langBtn" type="button" lang="en" aria-label="English version">en</button>
+</header>
+
+<main id="main">
+  <p class="phones" role="note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="5" height="7" rx="2"/><rect x="16" y="14" width="5" height="7" rx="2"/></svg><span data-i18n="wash.phones">Играй в наушниках: микрофон рядом с колонками ловит их звук, и петля начинает свистеть.</span></p>
+
+  <section class="card source" aria-labelledby="sourceTitle">
+    <div class="card-head">
+      <h2 id="sourceTitle" data-i18n="wash.source">Источник</h2>
+      <button class="help-btn" type="button" data-help="source" aria-expanded="false" aria-label="Подсказка: Источник"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.6 1.3c0 1.7-2.1 2.1-2.1 3.7"/><circle cx="12" cy="17.3" r="0.6"/></svg></button>
+    </div>
+    <div class="power-row">
+      <button class="btn primary" id="powerBtn" type="button" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg><span data-i18n="wash.power.on">Включить звук</span></button>
+      <button class="btn out-btn" id="outBtn" type="button" aria-pressed="false" disabled><span class="dot" aria-hidden="true"></span><span id="outText" data-i18n="wash.out.muted">Выход выключен</span></button>
+    </div>
+    <div class="mic-row">
+      <button class="btn" id="micBtn" type="button" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/></svg><span id="micText" data-i18n="wash.mic.open">Открыть микрофон</span></button>
+      <label class="select-wrap"><span class="select-label" data-i18n="wash.mic.device">Вход</span><select id="micSelect"><option value="" data-i18n="wash.mic.defaultDevice">Микрофон по умолчанию</option></select></label>
+    </div>
+    <div class="clip-row">
+      <button class="btn" id="recBtn" type="button" aria-pressed="false" disabled><span class="rec-dot" aria-hidden="true"></span><span id="recText" data-i18n="wash.clip.rec">Записать фрагмент</span></button>
+      <button class="btn" id="clipBtn" type="button" aria-pressed="false" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg><span id="clipText" data-i18n="wash.clip.play">Играть фрагмент по кругу</span></button>
+      <span class="clip-state" id="clipState" data-i18n="wash.clip.none">Фрагмента пока нет</span>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card fx" aria-labelledby="presetTitle">
+    <div class="preset-bar">
+      <h2 id="presetTitle" class="preset-title" data-i18n="wash.preset.title">Пресет</h2>
+      <button class="arrow-btn" id="presetPrev" type="button" aria-label="Предыдущий пресет" data-i18n-aria="wash.preset.prev"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <select id="presetSelect" aria-labelledby="presetTitle"></select>
+      <button class="arrow-btn" id="presetNext" type="button" aria-label="Следующий пресет" data-i18n-aria="wash.preset.next"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <span class="preset-changed" id="presetChanged" hidden data-i18n="wash.preset.changed">изменён</span>
+    </div>
+    <p class="preset-about" id="presetAbout"></p>
+    <div class="groups" id="groups"></div>
+  </section>
+
+  <section class="card meters" aria-labelledby="metersTitle">
+    <div class="card-head">
+      <h2 id="metersTitle" data-i18n="wash.meters.title">Индикаторы</h2>
+      <button class="help-btn" type="button" data-help="meters" aria-expanded="false" aria-label="Подсказка: Индикаторы"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.6 1.3c0 1.7-2.1 2.1-2.1 3.7"/><circle cx="12" cy="17.3" r="0.6"/></svg></button>
+    </div>
+    <div class="meter-row"><span class="meter-name" data-i18n="wash.meters.input">Вход</span><div class="meter" id="inMeter" aria-hidden="true"><i class="rms"></i><i class="peak"></i></div><span class="meter-val" id="inVal">−∞</span></div>
+    <div class="meter-row"><span class="meter-name" data-i18n="wash.meters.output">Выход</span><div class="meter" id="outMeter" aria-hidden="true"><i class="rms"></i><i class="peak"></i></div><span class="meter-val" id="outVal">−∞</span></div>
+    <div class="meter-row"><span class="meter-name" data-i18n="wash.meters.limiter">Ограничитель</span><span class="meter-text" id="limVal" data-i18n="wash.meters.rest">не работает</span></div>
+    <h3 class="lat-title"><span data-i18n="wash.latency.title">Задержка</span>: <span class="lat-note" data-i18n="wash.latency.note">оценка браузера, не реальная задержка</span></h3>
+    <dl class="lat" id="latency"></dl>
+  </section>
+
+  <section class="card hang" aria-labelledby="hangTitle">
+    <div class="card-head">
+      <h2 id="hangTitle" data-i18n="wash.hang.title">Ханг на экране</h2>
+      <button class="help-btn" type="button" data-help="hang" aria-expanded="false" aria-label="Подсказка: Ханг на экране"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.6 1.3c0 1.7-2.1 2.1-2.1 3.7"/><circle cx="12" cy="17.3" r="0.6"/></svg></button>
+    </div>
+    <label class="select-wrap"><span class="select-label" data-i18n="wash.hang.scale">Строй</span><select id="scaleSelect"></select></label>
+    <svg class="pan" id="pan" role="group" aria-labelledby="hangTitle"></svg>
+  </section>
+</main>
+<div class="help-pop" id="helpPop" role="dialog" hidden></div>
+</body>
+</html>

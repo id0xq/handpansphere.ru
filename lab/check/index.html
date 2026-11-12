@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Проверка звука — Handpan Sphere</title>
+<meta name="theme-color" content="#F4F2FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07090F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../../icons/icon.svg" type="image/svg+xml">
+  <script type="module" crossorigin src="../../assets/check-C7Nd-EUO.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/params-CpkzLGkn.js">
+  <link rel="stylesheet" crossorigin href="../../assets/check-fRjxElDK.css">
+  <link rel="stylesheet" crossorigin href="../../assets/styles-QhfIaQdQ.css">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<header class="top">
+  <a class="brand" href="../../">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+    <span class="brand-text">
+      <span class="brand-name" data-i18n="check.title">Проверка звука</span>
+      <span class="tagline" data-i18n="check.tagline">Handpan Sphere</span>
+    </span>
+  </a>
+  <button class="lang-btn" id="langBtn" type="button" lang="en" aria-label="English version">en</button>
+</header>
+
+<main id="main">
+  <section class="card">
+    <p class="intro" data-i18n="check.intro">Пять коротких звуков, каждый сделан по-своему. После каждого отметь, слышно ли его. Громкость телефона прибавь заранее.</p>
+    <ol class="steps" id="steps"></ol>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <div class="answer" id="answer" hidden>
+      <button class="btn primary" id="yesBtn" type="button" data-i18n="check.yes">Слышно</button>
+      <button class="btn" id="noBtn" type="button" data-i18n="check.no">Не слышно</button>
+    </div>
+    <div class="power-row"><button class="btn primary" id="startBtn" type="button" data-i18n="check.start">Начать проверку</button></div>
+  </section>
+
+  <section class="card" id="reportCard" aria-labelledby="reportTitle" hidden>
+    <h2 id="reportTitle" data-i18n="check.reportTitle">Отчёт</h2>
+    <p class="intro" data-i18n="check.reportHint">Скопируй его и пришли в чат, откуда пришла ссылка.</p>
+    <textarea id="report" rows="9" readonly aria-labelledby="reportTitle"></textarea>
+    <div class="power-row"><button class="btn primary" id="copyBtn" type="button" data-i18n="check.copy">Скопировать отчёт</button></div>
+  </section>
+</main>
+</body>
+</html>
